@@ -6,13 +6,20 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    
+
+    [Header("Score Elements")]
     public int score;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+
     private void Awake()
     {
         highScoreText.text = "Best: " + GetHighScore().ToString();
+        gameOverPanel.SetActive(false);
     }
 
     public void IncreaseScore(int points)
@@ -33,11 +40,25 @@ public class GameManager : MonoBehaviour
         return i;
     }
 
-
-
     public void OnBombHit()
     {
+        gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         Debug.Log("Bomb hit");
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        score = 0;
+        scoreText.text = "0";
+
+        gameOverPanel.SetActive(false);
+
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Interactable"))
+        {
+            Destroy(g);
+        }
+
     }
 }
