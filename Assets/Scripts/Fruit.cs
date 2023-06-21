@@ -31,6 +31,7 @@ public class Fruit : MonoBehaviour
             return;
         }
 
+        FindObjectOfType<GameManager>().IncreaseScore(3);
         CreateSlicedFruit();
     }
 }
