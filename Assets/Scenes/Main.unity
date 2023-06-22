@@ -157,8 +157,8 @@ MonoBehaviour:
   scoreText: {fileID: 705046782}
   highScoreText: {fileID: 811873808}
   gameOverPanel: {fileID: 2138389489}
-  gameOverScore: {fileID: 1605805077}
-  gameOverHighScore: {fileID: 674700019}
+  gameOverScoreText: {fileID: 1605805077}
+  gameOverHighScoreText: {fileID: 674700019}
 --- !u!4 &345407237
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,6 +1424,8 @@ MonoBehaviour:
   - {fileID: 996826097}
   fruitsToSpawn:
   - {fileID: 3495665431602840650, guid: c616e8499b40d424d933828040b52520, type: 3}
+  - {fileID: 4784085415012271405, guid: a01fd1114111b4fe09604cf473b8fd88, type: 3}
+  - {fileID: 4245577087630019341, guid: 331a84ffee464459cbd9c3876353cf20, type: 3}
   bomb: {fileID: 5246592090731525866, guid: 676660f90157842bbb2188abd4cf8bb6, type: 3}
   minWait: 0.3
   maxWait: 1
