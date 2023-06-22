@@ -10,16 +10,26 @@ public class GameManager : MonoBehaviour
 
     [Header("Score Elements")]
     public int score;
+    public int highScore;
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
 
     [Header("Game Over")]
     public GameObject gameOverPanel;
+    public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI gameOverHighScoreText;
 
     private void Awake()
     {
-        highScoreText.text = "Best: " + GetHighScore().ToString();
         gameOverPanel.SetActive(false);
+        GetHighScore();
+    }
+
+    private void GetHighScore()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore");
+        highScoreText.text = "Best: " + highScore.ToString();
     }
 
     public void IncreaseScore(int points)
@@ -27,31 +37,27 @@ public class GameManager : MonoBehaviour
         score += points;
         scoreText.text = score.ToString();
 
-        if (score > GetHighScore())
+        if(score > highScore)
         {
-            PlayerPrefs.SetInt("HighScore", score);
-            highScoreText.text = "Best: " + score.ToString();
+            PlayerPrefs.SetInt("HighScore",score);
+            highScoreText.text = score.ToString();
         }
-    }
-
-    public int GetHighScore()
-    {
-        int i = PlayerPrefs.GetInt("HighScore");
-        return i;
     }
 
     public void OnBombHit()
     {
-        gameOverPanel.SetActive(true);
         Time.timeScale = 0;
-        Debug.Log("Bomb hit");
+
+        gameOverScoreText.text = "Score: " + score.ToString();
+        gameOverHighScoreText.text = "High Score: " + highScore.ToString();
+
+        gameOverPanel.SetActive(true);
     }
 
     public void RestartGame()
     {
-        Time.timeScale = 1;
         score = 0;
-        scoreText.text = "0";
+        scoreText.text = score.ToString();
 
         gameOverPanel.SetActive(false);
 
@@ -59,6 +65,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(g);
         }
+
+        Time.timeScale = 1;
 
     }
 }
